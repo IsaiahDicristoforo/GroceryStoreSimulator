@@ -1,4 +1,5 @@
-﻿using GroceryStoreSimulatorWebAPI.Models;
+﻿using GroceryStoreSimulatorWebAPI.DataAccess.Repositories;
+using GroceryStoreSimulatorWebAPI.Models;
 using GroceryStoreSimulatorWebAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,16 +12,18 @@ namespace GroceryStoreSimulatorWebAPI.Controllers
     public class StoresController : ControllerBase
     {
         private readonly StoresService storesService;
+        private readonly OrderRepository orderRepository;
 
-        public StoresController(StoresService storesService)
+        public StoresController(StoresService storesService, OrderRepository orderRepository)
         {
             this.storesService = storesService;
+            this.orderRepository = orderRepository;
         }
         // GET: api/<StoresController>
         [HttpGet]
-        public IEnumerable<Store> Get()
+        public IEnumerable<Order> Get()
         {
-            return storesService.GetStores();
+            return orderRepository.Get();
         }
 
         // GET api/<StoresController>/5
