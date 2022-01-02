@@ -1,5 +1,6 @@
 ﻿using System.Data.SqlClient;
 using Dapper.Contrib.Extensions;
+using Dapper;
 
 namespace GroceryStoreSimulatorWebAPI.DataAccess.Repositories
 {
@@ -10,6 +11,21 @@ namespace GroceryStoreSimulatorWebAPI.DataAccess.Repositories
         public BaseRepository(IConfiguration configuration)
         {
             this.configuration = configuration;
+        }
+
+        public List<U> ExecuteQuery<U>(string queryToExecute)
+        {
+            using(SqlConnection connection = GetSqlConnection())
+            {
+                return connection.Query<U>(queryToExecute).ToList();
+            }
+        }
+        public U ExecuteQuerySingle<U>(string queryToExecute)
+        {
+            using (SqlConnection connection = GetSqlConnection())
+            {
+                return (U)connection.QuerySingle<U>(queryToExecute);
+            }
         }
 
         public T Get(int id)
@@ -60,7 +76,7 @@ namespace GroceryStoreSimulatorWebAPI.DataAccess.Repositories
             }
         }
 
-        private SqlConnection GetSqlConnection()
+        protected SqlConnection GetSqlConnection()
         {
             SqlConnection connectionToReturn = new SqlConnection(configuration.GetConnectionString("GroceryStoreSimConnectionString"));
             connectionToReturn.Open();

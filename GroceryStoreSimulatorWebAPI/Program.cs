@@ -1,5 +1,6 @@
 using GroceryStoreSimulatorWebAPI.DataAccess;
 using GroceryStoreSimulatorWebAPI.DataAccess.Repositories;
+using GroceryStoreSimulatorWebAPI.GraphQL;
 using GroceryStoreSimulatorWebAPI.Models;
 using GroceryStoreSimulatorWebAPI.Services;
 
@@ -15,6 +16,15 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 builder.Services.AddTransient(typeof(OrderService));
+builder.Services.AddTransient(typeof(StoreService));
+builder.Services.AddTransient(typeof(OrderDetailService));
+builder.Services.AddTransient(typeof(OrderRepository));
+builder.Services.AddTransient(typeof(BaseRepository<>));
+
+
+builder.Services.AddGraphQLServer()
+    .AddQueryType<Query>()
+    .AddType<OrderType>();
 
 
 builder.Services.AddCors();
@@ -26,14 +36,21 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
 }
 
 app.UseHttpsRedirection();
 
 app.UseCors(builder => builder.WithOrigins("http://localhost:4200"));
 
+app.UseRouting().UseEndpoints(endpoints =>
+{
+    endpoints.MapGraphQL();
+});
+
 app.UseAuthorization();
 
 app.MapControllers();
+
 
 app.Run();

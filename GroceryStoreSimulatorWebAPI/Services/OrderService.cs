@@ -5,8 +5,13 @@ namespace GroceryStoreSimulatorWebAPI.Services
 {
     public class OrderService : BaseService<Order>
     {
-        public OrderService(IBaseRepository<Order> baseDataAccess) : base(baseDataAccess)
+        private readonly OrderRepository baseDataAccess;
+
+        public OrderService(OrderRepository baseDataAccess) : base(baseDataAccess)
         {
+            this.baseDataAccess = baseDataAccess;
         }
+
+      
     }
 }

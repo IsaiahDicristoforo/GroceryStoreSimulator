@@ -2,26 +2,40 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarModule } from './navbar/navbar.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DashboardModule } from './dashboard/dashboard.module';
-import { StoreComponent } from './store/store.component'
 import { HttpClientModule } from '@angular/common/http';
 import { AppConfig } from './config/AppConfig';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomeComponent } from './home/home.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { OrderList } from './orders/order-list.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    StoreComponent
+    HomeComponent,
+    OrderList
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NavbarModule,
     DashboardModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule
   ],
   providers: [AppConfig],
   bootstrap: [AppComponent],

@@ -11,10 +11,10 @@ namespace GroceryStoreSimulatorWebAPI.Controllers
     [ApiController]
     public class StoresController : ControllerBase
     {
-        private readonly StoresService storesService;
+        private readonly StoreService storesService;
         private readonly OrderRepository orderRepository;
 
-        public StoresController(StoresService storesService, OrderRepository orderRepository)
+        public StoresController(StoreService storesService, OrderRepository orderRepository)
         {
             this.storesService = storesService;
             this.orderRepository = orderRepository;

@@ -16,5 +16,7 @@ namespace GroceryStoreSimulatorWebAPI.Models
         public string? DeliveryAddress { get; set; }
         public DateTime? DateTimeDelivered { get; set; }
         public bool? AllOrNone { get; set; }
+        public List<OrderDetail>? OrderDetails { get; set; }
+        public StoreModel? Store { get; set; }
     }
 }
