@@ -1,0 +1,12 @@
+table{
+    width: 100%;
+    margin-top: 15px;
+}
+
+mat-spinner{
+    margin: 0 auto;
+}
+
+button{
+    margin-top: 10px;
+}

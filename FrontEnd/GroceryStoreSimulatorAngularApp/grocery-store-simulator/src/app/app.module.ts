@@ -15,6 +15,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { OrderList } from './orders/order-list.component';
+import { MatTableModule } from "@angular/material/table"
+import {MatProgressSpinnerModule, MatSpinner} from '@angular/material/progress-spinner';
+import { MatButton } from '@angular/material/button';
+
 
 
 @NgModule({
@@ -35,7 +39,11 @@ import { OrderList } from './orders/order-list.component';
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatTableModule,
+    MatProgressSpinnerModule,
+    MatButtonModule
+
   ],
   providers: [AppConfig],
   bootstrap: [AppComponent],

@@ -22,12 +22,20 @@ builder.Services.AddTransient(typeof(OrderRepository));
 builder.Services.AddTransient(typeof(BaseRepository<>));
 
 
+
+
+builder.Services.AddCors(options => options.AddPolicy("AllowAll",p =>
+{
+    p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().Build();
+}));
+
+
+
+
 builder.Services.AddGraphQLServer()
     .AddQueryType<Query>()
     .AddType<OrderType>();
 
-
-builder.Services.AddCors();
 
 var app = builder.Build();
 
@@ -41,12 +49,18 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors(builder => builder.WithOrigins("http://localhost:4200"));
+
+app.UseCors("AllowAll");
+
+
 
 app.UseRouting().UseEndpoints(endpoints =>
 {
     endpoints.MapGraphQL();
 });
+
+
+
 
 app.UseAuthorization();
 
